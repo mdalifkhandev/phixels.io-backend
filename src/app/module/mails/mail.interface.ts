@@ -3,4 +3,5 @@ export type TMailRequest = {
     subject: string;
     text: string;
     details?: string;
+    fileAttachments?: string[];
 }

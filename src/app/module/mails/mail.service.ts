@@ -5,7 +5,7 @@ import { SendMail, getFormalEmailHtml, getFormalEmailText } from "./utils";
 import { MailLog } from "./mail.model";
 
 const sendFormalMail = async (data: TMailRequest) => {
-    const { email, subject, text, details } = data;
+    const { email, subject, text, details, fileAttachments } = data;
 
     // Create formal HTML email template
     const htmlContent = getFormalEmailHtml(subject, text, details);
@@ -13,13 +13,20 @@ const sendFormalMail = async (data: TMailRequest) => {
     // Plain text version
     const plainText = getFormalEmailText(subject, text, details);
 
+    // Prepare attachments if present
+    const attachments = fileAttachments?.map(url => ({
+        filename: url.split('/').pop() || 'attachment',
+        path: url
+    }));
+
     try {
         // Send the email
         const success = await SendMail({
             to: email,
             subject: subject,
             text: plainText.trim(),
-            html: htmlContent
+            html: htmlContent,
+            attachments: attachments
         });
 
         if (!success) {

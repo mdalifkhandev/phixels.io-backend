@@ -17,7 +17,8 @@ const sendMailValidationSchema = z.object({
         }).min(1, {
             message: "Text cannot be empty"
         }),
-        details: z.string().optional()
+        details: z.string().optional(),
+        fileAttachments: z.array(z.string()).optional()
     })
 });
 
