@@ -4,6 +4,8 @@ import { MailRouter } from "../module/mails/mail.route";
 import { BlogRouter } from "../module/blogs/blog.route";
 import { PortfolioRouter } from "../module/portfolio/portfolio.route";
 
+import { CaseStudyRouter } from "../module/caseStudy/caseStudy.route";
+
 const router = Router()
 
 const moduleRought = [
@@ -22,6 +24,10 @@ const moduleRought = [
     {
         path: '/portfolio',
         route: PortfolioRouter
+    },
+    {
+        path: '/case-studies',
+        route: CaseStudyRouter
     }
 ]
 
